@@ -80,6 +80,13 @@ export function getSelectedAttributeValues(
   if (attribute.attribute.inputType === AttributeInputTypeEnum.REFERENCE) {
     return attribute.values.map(value => value.reference);
   }
+  if (attribute.attribute.inputType === AttributeInputTypeEnum.RICH_TEXT) {
+    return [attribute.values[0]?.richText];
+  }
+  if (attribute.attribute.inputType === AttributeInputTypeEnum.BOOLEAN) {
+    console.log([attribute.values[0]?.name || "false"]);
+    return [attribute.values[0]?.name || "false"];
+  }
   return attribute.values.map(value => value.slug);
 }
 

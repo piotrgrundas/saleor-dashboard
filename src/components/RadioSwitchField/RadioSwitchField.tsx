@@ -1,5 +1,6 @@
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import { makeStyles } from "@saleor/theme";
@@ -24,12 +25,17 @@ const useStyles = makeStyles(
     secondLabel: {
       display: "block",
       fontSize: "12px"
+    },
+    inline: {
+      flexDirection: "row",
+      justifyContent: "flex-end"
     }
   },
   { name: "RadioSwitchField" }
 );
 
 interface RadioSwitchFieldProps {
+  inline?: boolean;
   className?: string;
   disabled?: boolean;
   error?: boolean;
@@ -38,6 +44,7 @@ interface RadioSwitchFieldProps {
   secondOptionLabel: React.ReactNode;
   value?: boolean;
   onChange: (event: React.ChangeEvent<any>) => void;
+  helperText?: string;
 }
 
 export const RadioSwitchField: React.FC<RadioSwitchFieldProps> = props => {
@@ -49,7 +56,8 @@ export const RadioSwitchField: React.FC<RadioSwitchFieldProps> = props => {
     onChange,
     name,
     secondOptionLabel,
-    value
+    value,
+    helperText
   } = props;
   const classes = useStyles(props);
 
@@ -71,6 +79,7 @@ export const RadioSwitchField: React.FC<RadioSwitchFieldProps> = props => {
       disabled={disabled}
     >
       <RadioGroup
+        classes={{ root: props.inline ? classes.inline : undefined }}
         aria-label={name}
         name={name}
         value={initialValue}
@@ -91,6 +100,7 @@ export const RadioSwitchField: React.FC<RadioSwitchFieldProps> = props => {
           name={name}
         />
       </RadioGroup>
+      <FormHelperText>{helperText}</FormHelperText>
     </FormControl>
   );
 };

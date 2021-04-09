@@ -86,9 +86,11 @@ export enum AttributeErrorCode {
 }
 
 export enum AttributeInputTypeEnum {
+  BOOLEAN = "BOOLEAN",
   DROPDOWN = "DROPDOWN",
   FILE = "FILE",
   MULTISELECT = "MULTISELECT",
+  NUMERIC = "NUMERIC",
   REFERENCE = "REFERENCE",
   RICH_TEXT = "RICH_TEXT",
 }
@@ -1859,7 +1861,7 @@ export interface StaffUserInput {
 
 export interface StockInput {
   warehouse: string;
-  quantity?: number | null;
+  quantity: number;
 }
 
 export interface TranslationInput {

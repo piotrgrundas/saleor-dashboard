@@ -68,6 +68,14 @@ const inputTypeMessages = defineMessages({
   text: {
     defaultMessage: "Text",
     description: "text attribute type"
+  },
+  numeric: {
+    defaultMessage: "Numeric",
+    description: "numeric attribute type"
+  },
+  boolean: {
+    defaultMessage: "Boolean",
+    description: "boolean attribute type"
   }
 });
 
@@ -128,6 +136,14 @@ const AttributeDetails: React.FC<AttributeDetailsProps> = props => {
     {
       label: intl.formatMessage(inputTypeMessages.text),
       value: AttributeInputTypeEnum.RICH_TEXT
+    },
+    {
+      label: intl.formatMessage(inputTypeMessages.numeric),
+      value: AttributeInputTypeEnum.NUMERIC
+    },
+    {
+      label: intl.formatMessage(inputTypeMessages.boolean),
+      value: AttributeInputTypeEnum.BOOLEAN
     }
   ];
   const entityTypeChoices = [

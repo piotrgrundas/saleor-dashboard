@@ -135,8 +135,6 @@ function useProductVariantUpdateForm(
     makeChangeHandler: makeMetadataChangeHandler
   } = useMetadataChangeTrigger();
 
-  // console.log({ attributes, initial });
-
   const handleChange: FormChange = (event, cb) => {
     form.change(event, cb);
     triggerChange();
@@ -243,7 +241,7 @@ function useProductVariantUpdateForm(
     removeStocks: stockDiff.removed,
     updateStocks
   };
-
+  // console.log({ submitData, initial });
   const handleSubmit = async (data: ProductVariantUpdateSubmitData) => {
     const errors = await onSubmit(data);
 

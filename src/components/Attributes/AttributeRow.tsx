@@ -1,3 +1,4 @@
+import { TextField } from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import { AttributeInput } from "@saleor/components/Attributes/Attributes";
 import BasicAttributeRow from "@saleor/components/Attributes/BasicAttributeRow";
@@ -13,12 +14,14 @@ import {
 } from "@saleor/components/Attributes/utils";
 import FileUploadField from "@saleor/components/FileUploadField";
 import MultiAutocompleteSelectField from "@saleor/components/MultiAutocompleteSelectField";
+import { RadioSwitchField } from "@saleor/components/RadioSwitchField";
 import RichTextEditor from "@saleor/components/RichTextEditor";
 import SingleAutocompleteSelectField from "@saleor/components/SingleAutocompleteSelectField";
 import SortableChipsField from "@saleor/components/SortableChipsField";
 import { PageErrorWithAttributesFragment } from "@saleor/fragments/types/PageErrorWithAttributesFragment";
 import { ProductErrorWithAttributesFragment } from "@saleor/fragments/types/ProductErrorWithAttributesFragment";
 import { FormsetChange } from "@saleor/hooks/useFormset";
+import { commonMessages } from "@saleor/intl";
 import { ReorderEvent } from "@saleor/types";
 import { AttributeInputTypeEnum } from "@saleor/types/globalTypes";
 import React from "react";
@@ -155,6 +158,41 @@ const AttributeRow: React.FC<AttributeRowProps> = ({
             helperText={getErrorMessage(error, intl)}
             onChange={data => onChange(attribute.id, JSON.stringify(data))}
             data={getRichTextData(attribute)}
+          />
+        </BasicAttributeRow>
+      );
+    case AttributeInputTypeEnum.NUMERIC:
+      return (
+        <BasicAttributeRow label={attribute.label}>
+          <TextField
+            fullWidth
+            disabled={disabled}
+            error={!!error}
+            helperText={getErrorMessage(error, intl)}
+            label={intl.formatMessage(messages.valueLabel)}
+            name={`attribute:${attribute.label}`}
+            onChange={event => onChange(attribute.id, event.target.value)}
+            type="numeric"
+            value={attribute.value[0]}
+          />
+        </BasicAttributeRow>
+      );
+    case AttributeInputTypeEnum.BOOLEAN:
+      console.log(JSON.parse(attribute.value[0]));
+      return (
+        <BasicAttributeRow label={attribute.label}>
+          <RadioSwitchField
+            inline
+            disabled={disabled}
+            error={!!error}
+            firstOptionLabel={intl.formatMessage(commonMessages.yes)}
+            secondOptionLabel={intl.formatMessage(commonMessages.no)}
+            name={`attribute:${attribute.label}`}
+            value={JSON.parse(attribute.value[0])}
+            onChange={event => {
+              onChange(attribute.id, event.target.value.toString());
+            }}
+            helperText={getErrorMessage(error, intl)}
           />
         </BasicAttributeRow>
       );

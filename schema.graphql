@@ -502,6 +502,8 @@ enum AttributeInputTypeEnum {
   FILE
   REFERENCE
   RICH_TEXT
+  NUMERIC
+  BOOLEAN
 }
 
 type AttributeReorderValues {
@@ -5346,7 +5348,7 @@ input StockFilterInput {
 
 input StockInput {
   warehouse: ID!
-  quantity: Int
+  quantity: Int!
 }
 
 enum TaxRateType {
